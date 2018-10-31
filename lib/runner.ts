@@ -1,7 +1,7 @@
-// import TestFileReader from './testFileReader';
 import Tests from '../test-files-ts/index';
-import ConvexHull from './convex-hull/index';
-import { IPoint } from './convex-hull/point';
+import ClosestPair from './closest-pair/index';
+import { IPoint, Point } from './closest-pair/point'
+import { ILine } from './closest-pair/line'
 
 interface TestObject {
   name : string,
@@ -16,57 +16,53 @@ export default class Runner {
   }
 
   processTestFile (fileData : Array<string>) {
-    return fileData.map(d => d.split(' ').map(n => parseInt(n)))
+    return fileData.map(d => d.split(' ').map(n => parseInt(n))).map(pair => new Point(pair))
   }
 
   runTest (testFile: TestObject) {
-    // const data = await new TestFileReader(testFile).readFile();
     const data = this.processTestFile(testFile.data);
-    const answer = new ConvexHull(data).computeConvexHull();
-    this.printTestResults(testFile.name, data, answer);
+    const answer = new ClosestPair(data).computeClosestPair();
+    this.printTestResults(testFile.name, answer);
   }
 
-  printTestResults (testFile:string, testData:Array<Array<number>>, testAnswer:Array<IPoint>|undefined) {
-    console.log(`Calculating Convex Hull for ${testFile}:\n`)
-    this.printTestFile('node', testData);
-    console.log('\n  Convex Hull: \n')
-    this.printAnswer('node', testAnswer);
-    console.log('\n--------------------------------------\n\n')
+  printTestResults (testFile:string, testAnswer:ILine) {
+    this.printTest('node', testFile, testAnswer);
     if (typeof <any>window !== 'undefined') {
-      document.write(`Calculating Convex Hull for ${testFile}:<br>`)
-      this.printTestFile('window', testData);
-      document.write('<br>  Convex Hull: <br>')
-      this.printAnswer('window', testAnswer);
-      document.write('<br>--------------------------------------<br><br>')
+      this.printTest('window', testFile, testAnswer);
       document.body.style.whiteSpace = 'pre'
     }
   }
 
-  printTestFile (env:string, data: Array<Array<number>>) {
-    data.forEach(d => {
-      console.log(`    ${d.join(', ')}`)
-    })
+  printTest (env:string, testFile:string, testAnswer:ILine) {
+    this.printHeader(env, testFile);
+    this.printAnswer(env, testAnswer);
+    this.printBreak(env)
+  }
+
+  printBreak (env:string) {
     if (env === 'window') {
-      data.forEach(d => {
-        document.write(`    ${d.join(', ')}<br>`)
-      })
+      document.write('<br>----------------------------------------------------------------------------<br><br>')
+    } else {
+      console.log('\n----------------------------------------------------------------------------\n\n')
     }
   }
 
-  printAnswer (env:string, data: Array<IPoint> | undefined) {
-    if (data === undefined) console.log('    Cannot construct convex hull from less than 3 points');
-    else {
-      data.forEach(d => {
-        console.log(`    ${d.x}, ${d.y}`)
-      })
-    }
+  printHeader (env:string, testFile:string) {
+    const str = `Calculating Closest Pair for ${testFile}:`
     if (env === 'window') {
-      if (data === undefined) document.write('    Cannot construct convex hull from less than 3 points<br>');
-      else {
-        data.forEach(d => {
-          document.write(`    ${d.x}, ${d.y}<br>`)
-        })
-      }
+      document.write(`${str}<br>`)
+    } else {
+      console.log(`${str}\n`)
+    }
+  }
+
+  printAnswer (env:string, data:ILine) {
+    const distStr = `Distance: ${data.distance}`;
+    const pointsStr = `Points: (${data.a.x}, ${data.a.y}), (${data.b.x}, ${data.b.y})`
+    if (env === 'window') {
+      document.write(`    ${distStr}<br>    ${pointsStr}<br>`)
+    } else {
+      console.log(`    ${distStr}\n    ${pointsStr}\n`)
     }
   }
 }

@@ -1,16 +1,18 @@
 Jason Buss
 CSC-421
-Programming Assignment - Convex Hull
+Programming Assignment - Closest Pair
 
-Url: https://github.com/busster/Convex-Hull-TS
+Url: https://github.com/busster/Closest-Pair-TS
 
 Getting Started:
-`git clone https://github.com/busster/Convex-Hull-TS.git`
-`cd Convex-Hull-TS`
+
+`git clone https://github.com/busster/Closest-Pair-TS.git`
+
+`cd Closest-Pair-TS`
 
 This solution was written in Typescript and compiled to Javascript (CommonJs and RequireJs) and can either be run in a node environment, or in the browser. Note: the `.ts` files have already been compiled, you do not need to do this.
 
-The source code is all under the `lib/` directory, and the main class can be found at `lib/convex-hull/index.ts`
+The source code is all under the `lib/` directory, and the main class can be found at `lib/closest-pair/index.ts`
 
 If you have Node installed (I'm running v10.9.0) you can simply navigate to the root directory and run the script `npm test`. This just runs `node dist/lib/index.js`.
 

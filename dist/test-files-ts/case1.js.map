@@ -1,1 +1,1 @@
-{"version":3,"file":"case1.js","sourceRoot":"","sources":["../../test-files-ts/case1.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,MAAM,EAAE,QAAQ;IAChB,MAAM,EAAE;QACN,KAAK;QACL,KAAK;QACL,KAAK;KACN;CACF,CAAA"}
+{"version":3,"file":"case1.js","sourceRoot":"","sources":["../../test-files-ts/case1.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,MAAM,EAAE,QAAQ;IAChB,MAAM,EAAE;QACN,WAAW;QACX,WAAW;QACX,UAAU;QACV,WAAW;QACX,WAAW;QACX,SAAS;QACT,WAAW;QACX,WAAW;QACX,YAAY;QACZ,UAAU;KACX;CACF,CAAA"}
